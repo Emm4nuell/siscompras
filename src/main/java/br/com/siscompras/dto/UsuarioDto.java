@@ -74,5 +74,5 @@ public class UsuarioDto {
 
         return usuario;
     }
-    
+
 }
