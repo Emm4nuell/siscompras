@@ -20,6 +20,7 @@ public class Cotacao {
     private boolean status;
     private String arquivo;
     private String preco;
+    private String frete;
     private String quantidade;
     private String url;
 
