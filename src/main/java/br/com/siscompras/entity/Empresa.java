@@ -29,4 +29,5 @@ public class Empresa {
     private String telefone;
     private String celular;
     private boolean status;
+
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,6 +31,9 @@ public class Usuario {
     private String nivelacesso;
     private String senha;
     private boolean status;
+
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Material> materiais;
 
 
 }
