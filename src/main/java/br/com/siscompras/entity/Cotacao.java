@@ -26,4 +26,8 @@ public class Cotacao {
     @ManyToOne
     @JoinColumn(name = "id_material")
     private Material material;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empresa")
+    private Empresa empresa;
 }

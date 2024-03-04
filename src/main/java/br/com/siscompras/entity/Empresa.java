@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -29,5 +31,8 @@ public class Empresa {
     private String telefone;
     private String celular;
     private boolean status;
+
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
+    private List<Cotacao> cotacoes;
 
 }

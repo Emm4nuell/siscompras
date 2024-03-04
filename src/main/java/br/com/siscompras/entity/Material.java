@@ -36,5 +36,5 @@ public class Material {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "material", fetch = FetchType.LAZY)
-    private List<Cotacao> cotacaos;
+    private List<Cotacao> cotacoes;
 }
