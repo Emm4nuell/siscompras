@@ -27,7 +27,7 @@ public class MaterialDto {
     private String observacao;
     private String arquivo;
 
-    public static MaterialDto toMaterial(Material material){
+    public static MaterialDto toMaterialDto(Material material){
         MaterialDto dto = new MaterialDto(
                 material.getId(),
                 material.getDatacriacao(),
@@ -47,7 +47,7 @@ public class MaterialDto {
         return  dto;
     }
 
-    public static Material toMaterialDto(MaterialDto dto){
+    public static Material toMaterial(MaterialDto dto){
         Material material = new Material(
                 dto.getId(),
                 dto.getDatacriacao(),
