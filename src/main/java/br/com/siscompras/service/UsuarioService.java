@@ -7,7 +7,9 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -20,8 +22,17 @@ public class UsuarioService {
 
         Optional<Usuario> opt = usuarioRepository.findByCpf(dto.getCpf());
 
-        opt.orElseThrow(() -> new NullPointerException("Usuario já cadastrado no sistema!"));
-
+        if(opt.isPresent()){
+            throw new NullPointerException("Usuário já cadastrado no sistema");
+        }
         usuarioRepository.save(UsuarioDto.toUsuario(dto));
+    }
+
+    public List<UsuarioDto> findAll() {
+        List<Usuario> usuarios = usuarioRepository.findAll();
+        List<UsuarioDto> dtos = usuarios.stream()
+                .map((e) -> UsuarioDto.toUsuarioDto(e)).collect(Collectors.toList());
+
+        return dtos;
     }
 }
