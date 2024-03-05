@@ -59,4 +59,10 @@ public class CotacaoDto {
 
         return cotacao;
     }
+
+    public static List<CotacaoDto> toListCotacaoDto(List<Cotacao> cotacoes){
+        List<CotacaoDto> dtos = cotacoes.stream().map((e) -> toCotacaoDto(e))
+                .collect(Collectors.toList());
+        return dtos;
+    }
 }

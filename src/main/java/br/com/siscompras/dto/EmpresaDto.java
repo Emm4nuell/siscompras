@@ -8,6 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -72,6 +75,12 @@ public class EmpresaDto {
                 empresa.isStatus()
         );
         return dto;
+    }
+
+    public static List<EmpresaDto> toListEmpresaDto(List<Empresa> empresas){
+        List<EmpresaDto> dtos = empresas.stream().map((e) -> toEmpresaDto(e))
+                .collect(Collectors.toList());
+        return dtos;
     }
 
 

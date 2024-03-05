@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -73,6 +74,12 @@ public class UsuarioDto {
         );
 
         return usuario;
+    }
+
+    public static List<UsuarioDto> toListUsuarioDto(List<Usuario> usuarios){
+        List<UsuarioDto> dtos = usuarios.stream().map((e) -> toUsuarioDto(e))
+                .collect(Collectors.toList());
+        return dtos;
     }
 
 }

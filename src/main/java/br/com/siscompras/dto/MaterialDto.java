@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -26,6 +28,7 @@ public class MaterialDto {
     private String maxvalor;
     private String observacao;
     private String arquivo;
+    private List<CotacaoDto> cotacaoDtos;
 
     public static MaterialDto toMaterialDto(Material material){
         MaterialDto dto = new MaterialDto(
@@ -41,7 +44,8 @@ public class MaterialDto {
                 material.getMinvalor(),
                 material.getMaxvalor(),
                 material.getObservacao(),
-                material.getArquivo()
+                material.getArquivo(),
+                CotacaoDto.toListCotacaoDto(material.getCotacoes())
         );
 
         return  dto;
@@ -65,7 +69,12 @@ public class MaterialDto {
                 null,
                 null
         );
-
         return  material;
+    }
+
+    public static List<MaterialDto> toListMaterialDto(List<Material> materiais){
+        List<MaterialDto> dtos = materiais.stream().map((e) -> toMaterialDto(e))
+                .collect(Collectors.toList());
+        return dtos;
     }
 }
