@@ -33,8 +33,8 @@ public class MaterialService {
 
     @Transactional
     public void saveNovo(MaterialNovoDto dto) {
-        Optional<Material> opt = materialRepository.findById(dto.getId());
-        dto.setDatacriacao(LocalDateTime.now());
+//        Optional<Material> opt = materialRepository.findById(dto.getId());
+//        dto.setDatacriacao(LocalDateTime.now());
         materialRepository.save(MaterialNovoDto.toMaterial(dto));
     }
 }

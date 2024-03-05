@@ -1,5 +1,6 @@
 package br.com.siscompras.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +25,12 @@ public class Cotacao {
     private String quantidade;
     private String url;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_material")
     private Material material;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;

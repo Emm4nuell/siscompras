@@ -31,23 +31,21 @@ public class MaterialDto {
     private List<CotacaoDto> cotacaoDtos;
 
     public static MaterialDto toMaterialDto(Material material){
-        MaterialDto dto = new MaterialDto(
-                material.getId(),
-                material.getDatacriacao(),
-                material.getDataconclusao(),
-                material.getPrioridade(),
-                material.getDescricao(),
-                material.getQuantidade(),
-                material.isStatus(),
-                material.getAndamento(),
-                material.getMediavalor(),
-                material.getMinvalor(),
-                material.getMaxvalor(),
-                material.getObservacao(),
-                material.getArquivo(),
-                CotacaoDto.toListCotacaoDto(material.getCotacoes())
-        );
-
+        MaterialDto dto = new MaterialDto();
+                dto.setId(material.getId());
+                dto.setDatacriacao(material.getDatacriacao());
+                dto.setDataconclusao(material.getDataconclusao());
+                dto.setPrioridade(material.getPrioridade());
+                dto.setDescricao(material.getDescricao());
+                dto.setQuantidade(material.getQuantidade());
+                dto.setStatus(material.isStatus());
+                dto.setAndamento(material.getAndamento());
+                dto.setMediavalor(material.getMediavalor());
+                dto.setMinvalor(material.getMinvalor());
+                dto.setMaxvalor(material.getMaxvalor());
+                dto.setObservacao(material.getObservacao());
+                dto.setArquivo(material.getArquivo());
+                dto.setCotacaoDtos(CotacaoDto.toListCotacaoDto(material.getCotacoes()));
         return  dto;
     }
 

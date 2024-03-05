@@ -1,5 +1,6 @@
 package br.com.siscompras.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,10 +32,12 @@ public class Material {
     private String observacao;
     private String arquivo;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "material", fetch = FetchType.LAZY)
     private List<Cotacao> cotacoes;
 }

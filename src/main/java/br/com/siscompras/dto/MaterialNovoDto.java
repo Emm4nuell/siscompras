@@ -22,37 +22,26 @@ public class MaterialNovoDto {
     private String arquivo;
 
     public static MaterialNovoDto toMaterialNovoDto(Material material){
-        MaterialNovoDto dto = new MaterialNovoDto(
-                material.getId(),
-                material.getDatacriacao(),
-                material.getPrioridade(),
-                material.getDescricao(),
-                material.getQuantidade(),
-                material.getObservacao(),
-                material.getArquivo()
-        );
-
+        MaterialNovoDto dto = new MaterialNovoDto();
+                dto.setId(material.getId());
+                dto.setDatacriacao(material.getDatacriacao());
+                dto.setPrioridade(material.getPrioridade());
+                dto.setDescricao(material.getDescricao());
+                dto.setQuantidade(material.getQuantidade());
+                dto.setObservacao(material.getObservacao());
+                dto.setArquivo(material.getArquivo());
         return  dto;
     }
 
     public static Material toMaterial(MaterialNovoDto dto){
-        Material material = new Material(
-                dto.getId(),
-                dto.getDatacriacao(),
-                null,
-                dto.getPrioridade(),
-                dto.getDescricao(),
-                dto.getQuantidade(),
-                true,
-                null,
-                null,
-                null,
-                null,
-                dto.getObservacao(),
-                dto.getArquivo(),
-                null,
-                null
-        );
+        Material material = new Material();
+                material.setId(dto.getId());
+                material.setDatacriacao(dto.getDatacriacao());
+                material.setPrioridade(dto.getPrioridade());
+                material.setDescricao(dto.getDescricao());
+                material.setQuantidade(dto.getQuantidade());
+                material.setObservacao(dto.getObservacao());
+                material.setArquivo(dto.getArquivo());
 
         return  material;
     }

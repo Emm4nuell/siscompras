@@ -2,6 +2,7 @@ package br.com.siscompras.dto;
 
 import br.com.siscompras.entity.Cotacao;
 import br.com.siscompras.entity.Empresa;
+import br.com.siscompras.entity.Material;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,12 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class CotacaoDto {
 
     private Long id;
-    @NotBlank(message = "Campo obrigatório!")
+//    @NotBlank(message = "Campo obrigatório!")
     private LocalDateTime datacriacao;
     private boolean status;
     private String arquivo;
@@ -27,20 +28,19 @@ public class CotacaoDto {
     private String quantidade;
     private String url;
     private EmpresaDto empresaDto;
+    private MaterialDto materialDto;
 
     public static CotacaoDto toCotacaoDto(Cotacao cotacao){
-        CotacaoDto dto = new CotacaoDto(
-                cotacao.getId(),
-                cotacao.getDatacriacao(),
-                cotacao.isStatus(),
-                cotacao.getArquivo(),
-                cotacao.getPreco(),
-                cotacao.getFrete(),
-                cotacao.getQuantidade(),
-                cotacao.getUrl(),
-                EmpresaDto.toEmpresaDto(cotacao.getEmpresa())
-        );
-
+        CotacaoDto dto = new CotacaoDto();
+                dto.setId(cotacao.getId());
+                dto.setDatacriacao(cotacao.getDatacriacao());
+                dto.setStatus(cotacao.isStatus());
+                dto.setArquivo(cotacao.getArquivo());
+                dto.setPreco(cotacao.getPreco());
+                dto.setFrete(cotacao.getFrete());
+                dto.setQuantidade(cotacao.getQuantidade());
+                dto.setUrl(cotacao.getUrl());
+                dto.setEmpresaDto(EmpresaDto.toEmpresaDto(cotacao.getEmpresa()));
         return dto;
     }
 
@@ -56,6 +56,7 @@ public class CotacaoDto {
         cotacao.setQuantidade(dto.getQuantidade());
         cotacao.setUrl(dto.getUrl());
         cotacao.setEmpresa(EmpresaDto.toEmpresa(dto.getEmpresaDto()));
+        cotacao.setMaterial(MaterialDto.toMaterial(dto.getMaterialDto()));
 
         return cotacao;
     }
