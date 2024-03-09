@@ -37,4 +37,10 @@ public class MaterialService {
 //        dto.setDatacriacao(LocalDateTime.now());
         materialRepository.save(MaterialNovoDto.toMaterial(dto));
     }
+
+    public MaterialDto findById(Long id) {
+        Material material = materialRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Material não disponível!"));
+        return MaterialDto.toMaterialDto(material);
+    }
 }

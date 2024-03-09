@@ -24,7 +24,6 @@ public class MaterialController {
     public ResponseEntity<Void> save(@RequestBody @Valid MaterialDto dto){
 
         materialService.save(dto);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -34,10 +33,8 @@ public class MaterialController {
     public ResponseEntity<Void> novoMaterial(@RequestBody @Valid MaterialNovoDto dto){
 
         materialService.saveNovo(dto);
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
-
         return ResponseEntity.created(uri).build();
 
     }
@@ -46,5 +43,11 @@ public class MaterialController {
     public ResponseEntity<List<MaterialDto>> findAll(){
         List<MaterialDto> dtos = materialService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MaterialDto> findById(@PathVariable Long id){
+        MaterialDto dto = materialService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 }

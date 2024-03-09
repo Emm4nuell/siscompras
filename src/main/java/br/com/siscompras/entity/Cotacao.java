@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
@@ -19,11 +20,14 @@ public class Cotacao {
     private Long id;
     private LocalDateTime datacriacao;
     private boolean status;
+    private String descricao;
     private String arquivo;
-    private String preco;
-    private String frete;
+    private BigDecimal preco;
+    private BigDecimal frete;
+    private BigDecimal precototal;
     private String quantidade;
     private String url;
+    private String observacao;
 
     @JsonIgnore
     @ManyToOne

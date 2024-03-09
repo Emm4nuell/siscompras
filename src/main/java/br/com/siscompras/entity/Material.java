@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -26,9 +27,9 @@ public class Material {
     private Long quantidade;
     private boolean status;
     private String andamento;
-    private String mediavalor;
-    private String minvalor;
-    private String maxvalor;
+    private BigDecimal mediavalor;
+    private BigDecimal minvalor;
+    private BigDecimal maxvalor;
     private String observacao;
     private String arquivo;
 

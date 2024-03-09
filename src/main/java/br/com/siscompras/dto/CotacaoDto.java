@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,13 +21,16 @@ public class CotacaoDto {
     private Long id;
 //    @NotBlank(message = "Campo obrigatório!")
     private LocalDateTime datacriacao;
+    private String descricao;
     private boolean status;
     private String arquivo;
     @NotBlank(message = "Campo obrigatório!")
-    private String preco;
-    private String frete;
+    private BigDecimal preco;
+    private BigDecimal frete;
+    private BigDecimal precototal;
     private String quantidade;
     private String url;
+    private String observacao;
     private EmpresaDto empresaDto;
     private MaterialDto materialDto;
 
@@ -34,12 +38,15 @@ public class CotacaoDto {
         CotacaoDto dto = new CotacaoDto();
                 dto.setId(cotacao.getId());
                 dto.setDatacriacao(cotacao.getDatacriacao());
+                dto.setDescricao(cotacao.getDescricao());
                 dto.setStatus(cotacao.isStatus());
                 dto.setArquivo(cotacao.getArquivo());
                 dto.setPreco(cotacao.getPreco());
                 dto.setFrete(cotacao.getFrete());
+                dto.setPrecototal(cotacao.getPrecototal());
                 dto.setQuantidade(cotacao.getQuantidade());
                 dto.setUrl(cotacao.getUrl());
+                dto.setObservacao(cotacao.getObservacao());
                 dto.setEmpresaDto(EmpresaDto.toEmpresaDto(cotacao.getEmpresa()));
         return dto;
     }
@@ -53,6 +60,7 @@ public class CotacaoDto {
         cotacao.setArquivo(dto.getArquivo());
         cotacao.setPreco(dto.getPreco());
         cotacao.setFrete(dto.getFrete());
+        cotacao.setPrecototal(dto.getPrecototal().add(dto.getFrete()));
         cotacao.setQuantidade(dto.getQuantidade());
         cotacao.setUrl(dto.getUrl());
         cotacao.setEmpresa(EmpresaDto.toEmpresa(dto.getEmpresaDto()));
