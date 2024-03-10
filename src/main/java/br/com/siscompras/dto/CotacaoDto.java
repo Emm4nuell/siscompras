@@ -43,7 +43,6 @@ public class CotacaoDto {
         dto.setArquivo(cotacao.getArquivo());
         dto.setPreco(cotacao.getPreco());
         dto.setFrete(cotacao.getFrete());
-//                dto.setPrecototal(cotacao.getPrecototal());
         dto.setQuantidade(cotacao.getQuantidade());
         dto.setUrl(cotacao.getUrl());
         dto.setObservacao(cotacao.getObservacao());
@@ -55,17 +54,15 @@ public class CotacaoDto {
         Cotacao cotacao = new Cotacao();
 
         cotacao.setId(dto.getId());
-        cotacao.setDatacriacao(dto.getDatacriacao());
+        cotacao.setDatacriacao(LocalDateTime.now());
         cotacao.setStatus(dto.isStatus());
         cotacao.setArquivo(dto.getArquivo());
         cotacao.setPreco(dto.getPreco());
         cotacao.setFrete(dto.getFrete());
-//        cotacao.setPrecototal(dto.getPrecototal().add(dto.getFrete()));
         cotacao.setQuantidade(dto.getQuantidade());
         cotacao.setUrl(dto.getUrl());
         cotacao.setEmpresa(EmpresaDto.toEmpresa(dto.getEmpresaDto()));
         cotacao.setMaterial(MaterialDto.toMaterial(dto.getMaterialDto()));
-
         return cotacao;
     }
 

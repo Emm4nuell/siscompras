@@ -21,7 +21,7 @@ public class CotacaoController {
     private CotacaoService cotacaoService;
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody @Valid CotacaoDto dto){
+    public ResponseEntity<Void> save(@RequestBody @Valid CotacaoDto dto) {
 
         cotacaoService.save(dto);
 
@@ -31,7 +31,14 @@ public class CotacaoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CotacaoDto>> findAll(){
+    public ResponseEntity<List<CotacaoDto>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(cotacaoService.findAll());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CotacaoDto> findById(@PathVariable Long id){
+        CotacaoDto dto = cotacaoService.findById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
 }

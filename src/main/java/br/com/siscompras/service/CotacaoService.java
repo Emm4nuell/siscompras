@@ -35,7 +35,6 @@ public class CotacaoService {
 
         if (optEmpresa.isPresent()) {
             System.err.println("Contem o cnpj no sistema!");
-//            cotacao.setEmpresa(optEmpresa.get());
             cotacaoRepository.save(cotacao);
             return dto;
         }
@@ -47,5 +46,10 @@ public class CotacaoService {
 
     public List<CotacaoDto> findAll() {
         return CotacaoDto.toListCotacaoDto(cotacaoRepository.findAll());
+    }
+
+    public CotacaoDto findById(Long id) {
+        Cotacao cotacao = cotacaoRepository.findById(id).orElseThrow(() -> new NullPointerException("Cotação indisponível"));
+        return CotacaoDto.toCotacaoDto(cotacao);
     }
 }
