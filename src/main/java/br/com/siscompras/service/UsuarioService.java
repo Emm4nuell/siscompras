@@ -5,6 +5,7 @@ import br.com.siscompras.entity.Usuario;
 import br.com.siscompras.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @Transactional
     public void create(UsuarioDto dto) {
 
@@ -25,7 +29,9 @@ public class UsuarioService {
         if(opt.isPresent()){
             throw new NullPointerException("Usuário já cadastrado no sistema");
         }
-        usuarioRepository.save(UsuarioDto.toUsuario(dto));
+        Usuario usuario = UsuarioDto.toUsuario(dto);
+        usuario.setSenha(encoder.encode(dto.getSenha()));
+        usuarioRepository.save(usuario);
     }
 
     public List<UsuarioDto> findAll() {

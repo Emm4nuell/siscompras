@@ -38,43 +38,44 @@ public class UsuarioDto {
     private String foto;
     private boolean status;
 
+//    private MaterialDto materialDto;
+
     public static UsuarioDto toUsuarioDto(Usuario usuario){
-        UsuarioDto dto = new UsuarioDto(
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getCpf(),
-                usuario.getRg(),
-                usuario.getSexo(),
-                usuario.getEmail(),
-                usuario.getContato(),
-                usuario.getDatanascimento(),
-                usuario.getDatacadastro(),
-                usuario.getNivelacesso(),
-                usuario.getSenha(),
-                usuario.getFoto(),
-                usuario.isStatus()
-        );
+
+        UsuarioDto dto = new UsuarioDto();
+
+        dto.id = usuario.getId();
+        dto.nome = usuario.getNome();
+        dto.cpf = usuario.getCpf();
+        dto.rg = usuario.getRg();
+        dto.sexo = usuario.getSexo();
+        dto.email = usuario.getEmail();
+        dto.contato = usuario.getContato();
+        dto.datanascimento = usuario.getDatanascimento();
+        dto.datacadastro = usuario.getDatacadastro();
+        dto.nivelacesso = usuario.getNivelacesso();
+        dto.senha = usuario.getSenha();
+        dto.foto = usuario.getFoto();
+        dto.status = usuario.isStatus();
 
         return dto;
     }
 
     public static Usuario toUsuario(UsuarioDto dto){
-        Usuario usuario = new Usuario(
-                dto.getId(),
-                dto.getNome(),
-                dto.getCpf(),
-                dto.getRg(),
-                dto.getSexo(),
-                dto.getEmail(),
-                dto.getContato(),
-                dto.getDatanascimento(),
-                dto.getDatacadastro(),
-                dto.getNivelacesso(),
-                dto.getSenha(),
-                dto.getFoto(),
-                dto.isStatus(),
-                null
-        );
+        Usuario usuario = new Usuario();
+                usuario.setId(dto.getId());
+                usuario.setNome(dto.getNome());
+                usuario.setCpf(dto.getCpf());
+                usuario.setRg(dto.getRg());
+                usuario.setSexo(dto.getSexo());
+                usuario.setEmail(dto.getEmail());
+                usuario.setContato(dto.getContato());
+                usuario.setDatanascimento(dto.getDatanascimento());
+                usuario.setDatacadastro(dto.getDatacadastro());
+                usuario.setNivelacesso(dto.getNivelacesso());
+                usuario.setSenha(dto.getSenha());
+                usuario.setFoto(dto.getFoto());
+                usuario.setStatus(dto.isStatus());
 
         return usuario;
     }

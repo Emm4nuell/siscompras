@@ -35,7 +35,7 @@ public class Cotacao {
     private Material material;
 
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 }

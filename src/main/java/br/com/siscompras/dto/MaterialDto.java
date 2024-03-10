@@ -31,6 +31,8 @@ public class MaterialDto {
     private String arquivo;
     private List<CotacaoDto> cotacaoDtos;
 
+    private UsuarioDto usuarioDto;
+
     public static MaterialDto toMaterialDto(Material material) {
         MaterialDto dto = new MaterialDto();
         dto.setId(material.getId());
@@ -47,31 +49,26 @@ public class MaterialDto {
         dto.setObservacao(material.getObservacao());
         dto.setArquivo(material.getArquivo());
         dto.setCotacaoDtos(CotacaoDto.toListCotacaoDto(material.getCotacoes()));
+//        dto.setUsuarioDto(UsuarioDto.toUsuarioDto(material.getUsuario()));
         return dto;
     }
 
     public static Material toMaterial(MaterialDto dto) {
 
-        Material m = new Material();
-
-
-        Material material = new Material(
-                dto.getId(),
-                dto.getDatacriacao(),
-                dto.getDataconclusao(),
-                dto.getPrioridade(),
-                dto.getDescricao(),
-                dto.getQuantidade(),
-                dto.isStatus(),
-                dto.getAndamento(),
-                dto.getMediavalor(),
-                dto.getMinvalor(),
-                dto.getMaxvalor(),
-                dto.getObservacao(),
-                dto.getArquivo(),
-                null,
-                null
-        );
+        Material material = new Material();
+        material.setId(dto.getId());
+        material.setDescricao(dto.getDescricao());
+        material.setDataconclusao(dto.getDataconclusao());
+        material.setPrioridade(dto.getPrioridade());
+        material.setDescricao(dto.getDescricao());
+        material.setQuantidade(dto.getQuantidade());
+        material.setStatus(dto.isStatus());
+        material.setAndamento(dto.getAndamento());
+        material.setMediavalor(dto.getMediavalor());
+        material.setMinvalor(dto.getMinvalor());
+        material.setMaxvalor(dto.getMaxvalor());
+        material.setObservacao(dto.getObservacao());
+        material.setArquivo(dto.getArquivo());
         return material;
     }
 

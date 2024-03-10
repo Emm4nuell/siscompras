@@ -14,17 +14,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class CotacaoDto {
 
     private Long id;
-//    @NotBlank(message = "Campo obrigatório!")
+    //    @NotBlank(message = "Campo obrigatório!")
     private LocalDateTime datacriacao;
     private String descricao;
     private boolean status;
     private String arquivo;
-    @NotBlank(message = "Campo obrigatório!")
+    //    @NotBlank(message = "Campo obrigatório!")
     private BigDecimal preco;
     private BigDecimal frete;
     private BigDecimal precototal;
@@ -34,24 +34,24 @@ public class CotacaoDto {
     private EmpresaDto empresaDto;
     private MaterialDto materialDto;
 
-    public static CotacaoDto toCotacaoDto(Cotacao cotacao){
+    public static CotacaoDto toCotacaoDto(Cotacao cotacao) {
         CotacaoDto dto = new CotacaoDto();
-                dto.setId(cotacao.getId());
-                dto.setDatacriacao(cotacao.getDatacriacao());
-                dto.setDescricao(cotacao.getDescricao());
-                dto.setStatus(cotacao.isStatus());
-                dto.setArquivo(cotacao.getArquivo());
-                dto.setPreco(cotacao.getPreco());
-                dto.setFrete(cotacao.getFrete());
-                dto.setPrecototal(cotacao.getPrecototal());
-                dto.setQuantidade(cotacao.getQuantidade());
-                dto.setUrl(cotacao.getUrl());
-                dto.setObservacao(cotacao.getObservacao());
-                dto.setEmpresaDto(EmpresaDto.toEmpresaDto(cotacao.getEmpresa()));
+        dto.setId(cotacao.getId());
+        dto.setDatacriacao(cotacao.getDatacriacao());
+        dto.setDescricao(cotacao.getDescricao());
+        dto.setStatus(cotacao.isStatus());
+        dto.setArquivo(cotacao.getArquivo());
+        dto.setPreco(cotacao.getPreco());
+        dto.setFrete(cotacao.getFrete());
+//                dto.setPrecototal(cotacao.getPrecototal());
+        dto.setQuantidade(cotacao.getQuantidade());
+        dto.setUrl(cotacao.getUrl());
+        dto.setObservacao(cotacao.getObservacao());
+        dto.setEmpresaDto(EmpresaDto.toEmpresaDto(cotacao.getEmpresa()));
         return dto;
     }
 
-    public static Cotacao toCotacao(CotacaoDto dto){
+    public static Cotacao toCotacao(CotacaoDto dto) {
         Cotacao cotacao = new Cotacao();
 
         cotacao.setId(dto.getId());
@@ -60,7 +60,7 @@ public class CotacaoDto {
         cotacao.setArquivo(dto.getArquivo());
         cotacao.setPreco(dto.getPreco());
         cotacao.setFrete(dto.getFrete());
-        cotacao.setPrecototal(dto.getPrecototal().add(dto.getFrete()));
+//        cotacao.setPrecototal(dto.getPrecototal().add(dto.getFrete()));
         cotacao.setQuantidade(dto.getQuantidade());
         cotacao.setUrl(dto.getUrl());
         cotacao.setEmpresa(EmpresaDto.toEmpresa(dto.getEmpresaDto()));
@@ -69,7 +69,7 @@ public class CotacaoDto {
         return cotacao;
     }
 
-    public static List<CotacaoDto> toListCotacaoDto(List<Cotacao> cotacoes){
+    public static List<CotacaoDto> toListCotacaoDto(List<Cotacao> cotacoes) {
         List<CotacaoDto> dtos = cotacoes.stream().map((e) -> toCotacaoDto(e))
                 .collect(Collectors.toList());
         return dtos;
