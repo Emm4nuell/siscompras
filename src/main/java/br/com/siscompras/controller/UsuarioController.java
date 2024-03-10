@@ -21,10 +21,7 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<Void> create(@RequestBody @Valid UsuarioDto dto){
-
         usuarioService.create(dto);
-
-
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
 
@@ -35,5 +32,10 @@ public class UsuarioController {
     public ResponseEntity<List<UsuarioDto>> findAll(){
         List<UsuarioDto> dto = usuarioService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDto> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findById(id));
     }
 }

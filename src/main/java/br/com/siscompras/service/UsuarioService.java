@@ -37,4 +37,9 @@ public class UsuarioService {
     public List<UsuarioDto> findAll() {
         return UsuarioDto.toListUsuarioDto(usuarioRepository.findAll());
     }
+
+    public UsuarioDto findById(Long id) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NullPointerException("Usuário não localizado!"));
+        return UsuarioDto.toUsuarioDto(usuario);
+    }
 }
