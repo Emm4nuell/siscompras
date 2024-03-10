@@ -30,6 +30,7 @@ public class Usuario {
     private LocalDateTime datacadastro;
     private String nivelacesso;
     private String senha;
+    private String foto;
     private boolean status;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)

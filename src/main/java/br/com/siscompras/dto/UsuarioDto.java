@@ -35,6 +35,7 @@ public class UsuarioDto {
     private LocalDateTime datacadastro;
     private String nivelacesso;
     private String senha;
+    private String foto;
     private boolean status;
 
     public static UsuarioDto toUsuarioDto(Usuario usuario){
@@ -50,6 +51,7 @@ public class UsuarioDto {
                 usuario.getDatacadastro(),
                 usuario.getNivelacesso(),
                 usuario.getSenha(),
+                usuario.getFoto(),
                 usuario.isStatus()
         );
 
@@ -69,6 +71,7 @@ public class UsuarioDto {
                 dto.getDatacadastro(),
                 dto.getNivelacesso(),
                 dto.getSenha(),
+                dto.getFoto(),
                 dto.isStatus(),
                 null
         );

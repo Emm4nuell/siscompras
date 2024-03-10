@@ -31,26 +31,30 @@ public class MaterialDto {
     private String arquivo;
     private List<CotacaoDto> cotacaoDtos;
 
-    public static MaterialDto toMaterialDto(Material material){
+    public static MaterialDto toMaterialDto(Material material) {
         MaterialDto dto = new MaterialDto();
-                dto.setId(material.getId());
-                dto.setDatacriacao(material.getDatacriacao());
-                dto.setDataconclusao(material.getDataconclusao());
-                dto.setPrioridade(material.getPrioridade());
-                dto.setDescricao(material.getDescricao());
-                dto.setQuantidade(material.getQuantidade());
-                dto.setStatus(material.isStatus());
-                dto.setAndamento(material.getAndamento());
-                dto.setMediavalor(material.getMediavalor());
-                dto.setMinvalor(material.getMinvalor());
-                dto.setMaxvalor(material.getMaxvalor());
-                dto.setObservacao(material.getObservacao());
-                dto.setArquivo(material.getArquivo());
-                dto.setCotacaoDtos(CotacaoDto.toListCotacaoDto(material.getCotacoes()));
-        return  dto;
+        dto.setId(material.getId());
+        dto.setDatacriacao(material.getDatacriacao());
+        dto.setDataconclusao(material.getDataconclusao());
+        dto.setPrioridade(material.getPrioridade());
+        dto.setDescricao(material.getDescricao());
+        dto.setQuantidade(material.getQuantidade());
+        dto.setStatus(material.isStatus());
+        dto.setAndamento(material.getAndamento());
+        dto.setMediavalor(material.getMediavalor());
+        dto.setMinvalor(material.getMinvalor());
+        dto.setMaxvalor(material.getMaxvalor());
+        dto.setObservacao(material.getObservacao());
+        dto.setArquivo(material.getArquivo());
+        dto.setCotacaoDtos(CotacaoDto.toListCotacaoDto(material.getCotacoes()));
+        return dto;
     }
 
-    public static Material toMaterial(MaterialDto dto){
+    public static Material toMaterial(MaterialDto dto) {
+
+        Material m = new Material();
+
+
         Material material = new Material(
                 dto.getId(),
                 dto.getDatacriacao(),
@@ -68,10 +72,10 @@ public class MaterialDto {
                 null,
                 null
         );
-        return  material;
+        return material;
     }
 
-    public static List<MaterialDto> toListMaterialDto(List<Material> materiais){
+    public static List<MaterialDto> toListMaterialDto(List<Material> materiais) {
         List<MaterialDto> dtos = materiais.stream().map((e) -> toMaterialDto(e))
                 .collect(Collectors.toList());
         return dtos;
