@@ -28,6 +28,11 @@ public class EmpresaController {
         return ResponseEntity.created(uri).build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<EmpresaDto> findById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(empresaService.findById(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<EmpresaDto>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.findAll());
