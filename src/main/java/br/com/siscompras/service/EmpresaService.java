@@ -24,4 +24,9 @@ public class EmpresaService {
         List<EmpresaDto> dtos = EmpresaDto.toListEmpresaDto(empresaRepository.findAll());
         return  dtos;
     }
+
+    public EmpresaDto findById(Long id) {
+        Empresa empresa = empresaRepository.findById(id).orElseThrow(() -> new NullPointerException("Empresa não cadastrada!"));
+        return EmpresaDto.toEmpresaDto(empresa);
+    }
 }
