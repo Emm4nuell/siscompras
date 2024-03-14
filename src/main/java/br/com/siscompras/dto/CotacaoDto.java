@@ -19,12 +19,12 @@ import java.util.stream.Collectors;
 public class CotacaoDto {
 
     private Long id;
-    //    @NotBlank(message = "Campo obrigatório!")
+    @NotBlank(message = "Campo obrigatório!")
     private LocalDateTime datacriacao;
     private String descricao;
     private boolean status;
     private String arquivo;
-    //    @NotBlank(message = "Campo obrigatório!")
+    @NotBlank(message = "Campo obrigatório!")
     private BigDecimal preco;
     private BigDecimal frete;
     private BigDecimal precototal;
