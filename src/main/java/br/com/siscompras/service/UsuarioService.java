@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,10 +27,12 @@ public class UsuarioService {
 
         Optional<Usuario> opt = usuarioRepository.findByCpf(dto.getCpf());
 
-        if(opt.isPresent()){
+        if (opt.isPresent()) {
             throw new NullPointerException("Usuário já cadastrado no sistema");
         }
         Usuario usuario = UsuarioDto.toUsuario(dto);
+        usuario.setDatacadastro(LocalDateTime.now());
+        usuario.setStatus(true);
         usuario.setSenha(encoder.encode(dto.getSenha()));
         usuarioRepository.save(usuario);
     }
