@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmpresaService {
@@ -17,7 +18,13 @@ public class EmpresaService {
 
     @Transactional
     public void save(EmpresaDto dto) {
-        empresaRepository.save(EmpresaDto.toEmpresa(dto));
+        Optional<Empresa> opt = empresaRepository.findByCnpj(dto.getCnpj());
+        if (opt.isPresent()) {
+            throw new NullPointerException("Empresa já esta cadastrada no sistema");
+        }
+        Empresa empresa = EmpresaDto.toEmpresa(dto);
+        empresa.setStatus(true);
+        empresaRepository.save(empresa);
     }
 
     public List<EmpresaDto> findAll() {
