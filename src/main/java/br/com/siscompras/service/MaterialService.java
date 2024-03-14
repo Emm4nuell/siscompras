@@ -22,7 +22,10 @@ public class MaterialService {
 
     @Transactional
     public void save(MaterialDto dto) {
-            materialRepository.save(MaterialDto.toMaterial(dto));
+
+        Material material = MaterialDto.toMaterial(dto);
+        material.setStatus(true);
+        materialRepository.save(material);
     }
 
     public List<MaterialDto> findAll() {

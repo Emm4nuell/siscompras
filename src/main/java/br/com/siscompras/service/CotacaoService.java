@@ -39,6 +39,7 @@ public class CotacaoService {
             return dto;
         }
         System.err.println("Execultado fora do sistema!");
+        cotacao.setStatus(true);
         empresaRepository.save(cotacao.getEmpresa());
         cotacaoRepository.save(cotacao);
         return dto;
