@@ -20,7 +20,7 @@ public class EmpresaService {
     public void save(EmpresaDto dto) {
         Optional<Empresa> opt = empresaRepository.findByCnpj(dto.getCnpj());
         if (opt.isPresent()) {
-            throw new NullPointerException("Empresa já esta cadastrada no sistema");
+            throw new NullPointerException("Empresa já está cadastrada no sistema");
         }
         Empresa empresa = EmpresaDto.toEmpresa(dto);
         empresa.setStatus(true);

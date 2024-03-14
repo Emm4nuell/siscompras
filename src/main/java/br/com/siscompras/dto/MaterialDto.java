@@ -1,6 +1,7 @@
 package br.com.siscompras.dto;
 
 import br.com.siscompras.entity.Material;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,9 @@ public class MaterialDto {
     private Long id;
     private LocalDateTime datacriacao;
     private Date dataconclusao;
+    @NotBlank(message = "Campo prioridade é obrigatório!")
     private String prioridade;
+    @NotBlank(message = "Campo descrição é obrigatório!")
     private String descricao;
     private Long quantidade;
     private boolean status;

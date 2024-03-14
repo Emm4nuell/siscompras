@@ -2,6 +2,7 @@ package br.com.siscompras.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,9 @@ public class Material {
     private Long id;
     private LocalDateTime datacriacao;
     private Date dataconclusao;
+    @NotBlank(message = "Campo prioridade é obrigatório!")
     private String prioridade;
+    @NotBlank(message = "Campo descrição é obrigatório!")
     private String descricao;
     private Long quantidade;
     private boolean status;
