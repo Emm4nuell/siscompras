@@ -4,6 +4,7 @@ import br.com.siscompras.entity.Cotacao;
 import br.com.siscompras.entity.Empresa;
 import br.com.siscompras.entity.Material;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,12 @@ import java.util.stream.Collectors;
 public class CotacaoDto {
 
     private Long id;
-    @NotBlank(message = "Campo obrigatório!")
     private LocalDateTime datacriacao;
+    @NotBlank(message = "Campo descrição é obrigatório!")
     private String descricao;
     private boolean status;
     private String arquivo;
-    @NotBlank(message = "Campo obrigatório!")
+    @NotNull(message = "Campo preço é obrigatório!")
     private BigDecimal preco;
     private BigDecimal frete;
     private BigDecimal precototal;
