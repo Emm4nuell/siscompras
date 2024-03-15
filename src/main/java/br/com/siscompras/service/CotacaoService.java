@@ -26,20 +26,22 @@ public class CotacaoService {
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    @Autowired
+    private EmpresaService empresaService;
+
 
     @Transactional
     public CotacaoDto save(CotacaoDto dto) {
 
         Cotacao cotacao = CotacaoDto.toCotacao(dto);
         Optional<Empresa> optEmpresa = empresaRepository.findByCnpj(dto.getEmpresaDto().getCnpj());
+        cotacao.setStatus(true);
 
         if (optEmpresa.isPresent()) {
-            System.err.println("Contem o cnpj no sistema!");
+            cotacao.getEmpresa().setId(optEmpresa.get().getId());
             cotacaoRepository.save(cotacao);
             return dto;
         }
-        System.err.println("Execultado fora do sistema!");
-        cotacao.setStatus(true);
         empresaRepository.save(cotacao.getEmpresa());
         cotacaoRepository.save(cotacao);
         return dto;
