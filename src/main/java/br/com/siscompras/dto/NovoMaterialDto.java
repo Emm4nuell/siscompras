@@ -6,14 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CriarMaterialDto {
+public class NovoMaterialDto {
 
     private Long id;
 
@@ -24,22 +24,32 @@ public class CriarMaterialDto {
     private Long quantidade;
     private String observacao;
     private String arquivo;
+    private boolean status;
+    private String andamento;
+    private BigDecimal mediavalor;
+    private BigDecimal minvalor;
+    private BigDecimal maxvalor;
+
+
     private UsuarioDto usuarioDto;
 
-    public static Material toMaterial(CriarMaterialDto dto){
+    public static Material toMaterial(NovoMaterialDto dto){
         Material material = new Material();
         material.setPrioridade(dto.getPrioridade());
         material.setDescricao(dto.getDescricao());
         material.setQuantidade(dto.getQuantidade());
         material.setObservacao(dto.getObservacao());
         material.setArquivo(dto.getArquivo());
+        material.setMinvalor(dto.getMinvalor());
+        material.setMediavalor(dto.getMediavalor());
+        material.setMaxvalor(dto.getMaxvalor());
         material.setUsuario(UsuarioDto.toUsuario(dto.getUsuarioDto()));
 
         return material;
     }
 
-    public static CriarMaterialDto toMaterialDto(Material material){
-        CriarMaterialDto dto = new CriarMaterialDto();
+    public static NovoMaterialDto toMaterialDto(Material material){
+        NovoMaterialDto dto = new NovoMaterialDto();
         dto.prioridade = material.getPrioridade();
         dto.descricao = material.getDescricao();
         dto.quantidade = material.getQuantidade();
@@ -50,8 +60,8 @@ public class CriarMaterialDto {
         return dto;
     }
 
-    public static List<CriarMaterialDto> toListCriarMaterialDto(List<Material> materiais){
-        List<CriarMaterialDto> dtos = materiais.stream().map(x -> toMaterialDto(x)).collect(Collectors.toList());
+    public static List<NovoMaterialDto> toListCriarMaterialDto(List<Material> materiais){
+        List<NovoMaterialDto> dtos = materiais.stream().map(x -> toMaterialDto(x)).collect(Collectors.toList());
         return dtos;
     }
 }
