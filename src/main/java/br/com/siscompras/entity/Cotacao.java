@@ -21,6 +21,7 @@ public class Cotacao {
     private LocalDateTime datacriacao;
     private boolean status;
     private String descricao;
+    private String vendedor;
     private String arquivo;
     private BigDecimal preco;
     private BigDecimal frete;

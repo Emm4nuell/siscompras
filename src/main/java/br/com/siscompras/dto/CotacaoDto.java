@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +21,11 @@ import java.util.stream.Collectors;
 public class CotacaoDto {
 
     private Long id;
-    private LocalDateTime datacriacao;
+    private String datacriacao;
     @NotBlank(message = "Campo descrição é obrigatório!")
     private String descricao;
+    @NotBlank(message = "Campo vendedor é obrigatório")
+    private String vendedor;
     private boolean status;
     private String arquivo;
     @NotNull(message = "Campo preço é obrigatório!")
@@ -38,8 +41,9 @@ public class CotacaoDto {
     public static CotacaoDto toCotacaoDto(Cotacao cotacao) {
         CotacaoDto dto = new CotacaoDto();
         dto.setId(cotacao.getId());
-        dto.setDatacriacao(cotacao.getDatacriacao());
+        dto.setDatacriacao(cotacao.getDatacriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
         dto.setDescricao(cotacao.getDescricao());
+        dto.setVendedor(cotacao.getVendedor());
         dto.setStatus(cotacao.isStatus());
         dto.setArquivo(cotacao.getArquivo());
         dto.setPreco(cotacao.getPreco());
@@ -58,6 +62,7 @@ public class CotacaoDto {
         cotacao.setDatacriacao(LocalDateTime.now());
         cotacao.setStatus(dto.isStatus());
         cotacao.setArquivo(dto.getArquivo());
+        cotacao.setVendedor(dto.getVendedor());
         cotacao.setPreco(dto.getPreco());
         cotacao.setFrete(dto.getFrete());
         cotacao.setQuantidade(dto.getQuantidade());
