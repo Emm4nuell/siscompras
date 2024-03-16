@@ -1,6 +1,7 @@
 package br.com.siscompras.service;
 
 import br.com.siscompras.dto.CotacaoDto;
+import br.com.siscompras.dto.MaterialDto;
 import br.com.siscompras.entity.Cotacao;
 import br.com.siscompras.entity.Empresa;
 import br.com.siscompras.entity.Material;
@@ -11,8 +12,10 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CotacaoService {
@@ -39,10 +42,12 @@ public class CotacaoService {
             if (optEmpresa.isPresent()) {
                 cotacao.getEmpresa().setId(optEmpresa.get().getId());
                 cotacaoRepository.save(cotacao);
+                updatePreco(dto.getMaterialDto().getId());
                 return dto;
             }
             empresaRepository.save(cotacao.getEmpresa());
             cotacaoRepository.save(cotacao);
+            updatePreco(dto.getMaterialDto().getId());
             return dto;
     }
 
@@ -53,5 +58,22 @@ public class CotacaoService {
     public CotacaoDto findById(Long id) {
         Cotacao cotacao = cotacaoRepository.findById(id).orElseThrow(() -> new NullPointerException("Cotação indisponível"));
         return CotacaoDto.toCotacaoDto(cotacao);
+    }
+
+    public void updatePreco(Long id) {
+        double total = 0;
+        int divisor = 0;
+        Material material = materialRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
+
+        List<Cotacao> cotacoes = cotacaoRepository.findAll();
+
+        for(Cotacao c : cotacoes){
+            total += c.getPrecototal();
+            divisor ++;
+        }
+        material.setId(material.getId());
+        material.setMediavalor(total/divisor);
+        materialRepository.save(material);
     }
 }

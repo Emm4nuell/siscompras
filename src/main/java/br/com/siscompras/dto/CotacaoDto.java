@@ -29,9 +29,9 @@ public class CotacaoDto {
     private boolean status;
     private String arquivo;
     @NotNull(message = "Campo preço é obrigatório!")
-    private BigDecimal preco;
-    private BigDecimal frete;
-    private BigDecimal precototal;
+    private double preco;
+    private double frete;
+    private double precototal;
     private String quantidade;
     private String url;
     private String observacao;
@@ -48,6 +48,7 @@ public class CotacaoDto {
         dto.setArquivo(cotacao.getArquivo());
         dto.setPreco(cotacao.getPreco());
         dto.setFrete(cotacao.getFrete());
+        dto.setPrecototal(cotacao.getPrecototal());
         dto.setQuantidade(cotacao.getQuantidade());
         dto.setUrl(cotacao.getUrl());
         dto.setObservacao(cotacao.getObservacao());
@@ -65,6 +66,7 @@ public class CotacaoDto {
         cotacao.setVendedor(dto.getVendedor());
         cotacao.setPreco(dto.getPreco());
         cotacao.setFrete(dto.getFrete());
+        cotacao.setPrecototal(dto.getPreco() + dto.getFrete());
         cotacao.setQuantidade(dto.getQuantidade());
         cotacao.setUrl(dto.getUrl());
         cotacao.setEmpresa(EmpresaDto.toEmpresa(dto.getEmpresaDto()));

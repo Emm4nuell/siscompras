@@ -23,9 +23,9 @@ public class Cotacao {
     private String descricao;
     private String vendedor;
     private String arquivo;
-    private BigDecimal preco;
-    private BigDecimal frete;
-    private BigDecimal precototal;
+    private double preco;
+    private double frete;
+    private double precototal;
     private String quantidade;
     private String url;
     private String observacao;

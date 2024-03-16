@@ -51,4 +51,14 @@ public class MaterialService {
         Optional<Material> opt = materialRepository.findById(id);
 
     }
+
+    public MaterialDto update(Long id, MaterialDto dto) {
+        Material material = materialRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
+
+        Material m = MaterialDto.toMaterial(dto);
+        m.setId(material.getId());
+        materialRepository.save(m);
+        return dto;
+    }
 }
