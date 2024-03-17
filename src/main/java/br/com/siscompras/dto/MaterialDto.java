@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 public class MaterialDto {
 
     private Long id;
-    private LocalDateTime datacriacao;
+    private String datacriacao;
     private Date dataconclusao;
     @NotBlank(message = "Campo prioridade é obrigatório!")
     private String prioridade;
@@ -27,9 +29,9 @@ public class MaterialDto {
     private Long quantidade;
     private boolean status;
     private String andamento;
-    private BigDecimal mediavalor;
-    private BigDecimal minvalor;
-    private BigDecimal maxvalor;
+    private double mediavalor;
+    private double minvalor;
+    private double maxvalor;
     private String observacao;
     private String arquivo;
     private List<CotacaoDto> cotacaoDtos;
@@ -37,9 +39,12 @@ public class MaterialDto {
     private UsuarioDto usuarioDto;
 
     public static MaterialDto toMaterialDto(Material material) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
         MaterialDto dto = new MaterialDto();
         dto.setId(material.getId());
-        dto.setDatacriacao(material.getDatacriacao());
+        dto.setDatacriacao(material.getDatacriacao().format(formatter));
         dto.setDataconclusao(material.getDataconclusao());
         dto.setPrioridade(material.getPrioridade());
         dto.setDescricao(material.getDescricao());

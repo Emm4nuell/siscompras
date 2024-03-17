@@ -21,10 +21,11 @@ public class Cotacao {
     private LocalDateTime datacriacao;
     private boolean status;
     private String descricao;
+    private String vendedor;
     private String arquivo;
-    private BigDecimal preco;
-    private BigDecimal frete;
-    private BigDecimal precototal;
+    private double preco;
+    private double frete;
+    private double precototal;
     private String quantidade;
     private String url;
     private String observacao;
@@ -35,7 +36,7 @@ public class Cotacao {
     private Material material;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
 }

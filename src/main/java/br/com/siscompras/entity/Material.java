@@ -30,9 +30,9 @@ public class Material {
     private Long quantidade;
     private boolean status;
     private String andamento;
-    private BigDecimal mediavalor;
-    private BigDecimal minvalor;
-    private BigDecimal maxvalor;
+    private double mediavalor;
+    private double minvalor;
+    private double maxvalor;
     private String observacao;
     private String arquivo;
 

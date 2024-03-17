@@ -49,4 +49,10 @@ public class MaterialController {
         MaterialDto dto = materialService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<MaterialDto> update(@PathVariable Long id, @RequestBody MaterialDto dto){
+        MaterialDto materialdto = materialService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(materialdto);
+    }
 }
