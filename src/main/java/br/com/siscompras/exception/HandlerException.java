@@ -1,4 +1,4 @@
-package br.com.siscompras.handlerException;
+package br.com.siscompras.exception;
 
 import br.com.siscompras.exception.ErrorException;
 import jakarta.servlet.http.HttpServletRequest;
