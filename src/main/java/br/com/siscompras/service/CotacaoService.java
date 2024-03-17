@@ -8,12 +8,16 @@ import br.com.siscompras.entity.Material;
 import br.com.siscompras.repository.CotacaoRepository;
 import br.com.siscompras.repository.EmpresaRepository;
 import br.com.siscompras.repository.MaterialRepository;
+import br.com.siscompras.service.strategy.MaiorValor;
+import br.com.siscompras.service.strategy.MediaValor;
+import br.com.siscompras.service.strategy.MenorValor;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -61,19 +65,20 @@ public class CotacaoService {
     }
 
     public void updatePreco(Long id) {
-        double total = 0;
-        int divisor = 0;
+
+        Map<String, CalcularPrecoStrategy> map = Map.of(
+                "max", new MaiorValor(),
+                "media", new MediaValor(),
+                "min", new MenorValor()
+        );
+
         Material material = materialRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
 
-        List<Cotacao> cotacoes = cotacaoRepository.findAll();
-
-        for(Cotacao c : cotacoes){
-            total += c.getPrecototal();
-            divisor ++;
-        }
         material.setId(material.getId());
-        material.setMediavalor(total/divisor);
+        material.setMediavalor(map.get("media").CalcularPreco(material.getCotacoes()));
+        material.setMaxvalor(map.get("max").CalcularPreco(material.getCotacoes()));
+        material.setMinvalor(map.get("min").CalcularPreco(material.getCotacoes()));
         materialRepository.save(material);
     }
 }
