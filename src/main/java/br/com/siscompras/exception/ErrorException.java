@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Data
@@ -17,5 +18,6 @@ public class ErrorException {
     private String path;
     private int status;
     private LocalDateTime timestamp;
+    List<ValidException> valid;
 
 }

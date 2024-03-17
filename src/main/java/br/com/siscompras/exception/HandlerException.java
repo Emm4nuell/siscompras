@@ -19,7 +19,8 @@ public class HandlerException {
                 exception.getMessage(),
                 http.getRequestURI().toString(),
                 HttpStatus.NOT_FOUND.value(),
-                LocalDateTime.now());
+                LocalDateTime.now(),
+                null);
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
