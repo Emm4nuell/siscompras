@@ -24,7 +24,7 @@ public class CotacaoDto {
     private String datacriacao;
     @NotBlank(message = "Campo descrição é obrigatório!")
     private String descricao;
-    @NotBlank(message = "Campo vendedor é obrigatório")
+    @NotBlank(message = "Campo vendedor é obrigatório!")
     private String vendedor;
     private boolean status;
     private String arquivo;
@@ -35,6 +35,7 @@ public class CotacaoDto {
     private String quantidade;
     private String url;
     private String observacao;
+    @NotBlank(message = "Campo empresa é obrigatório!")
     private EmpresaDto empresaDto;
     private MaterialDto materialDto;
 

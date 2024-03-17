@@ -38,7 +38,7 @@ public class CotacaoService {
 
 
     @Transactional
-    public CotacaoDto save(CotacaoDto dto) {
+    public void save(CotacaoDto dto) {
             Cotacao cotacao = CotacaoDto.toCotacao(dto);
             Optional<Empresa> optEmpresa = empresaRepository.findByCnpj(dto.getEmpresaDto().getCnpj());
             cotacao.setStatus(true);
@@ -47,12 +47,12 @@ public class CotacaoService {
                 cotacao.getEmpresa().setId(optEmpresa.get().getId());
                 cotacaoRepository.save(cotacao);
                 updatePreco(dto.getMaterialDto().getId());
-                return dto;
+//                return dto;
             }
             empresaRepository.save(cotacao.getEmpresa());
             cotacaoRepository.save(cotacao);
             updatePreco(dto.getMaterialDto().getId());
-            return dto;
+//            return dto;
     }
 
     public List<CotacaoDto> findAll() {
