@@ -47,12 +47,11 @@ public class CotacaoService {
                 cotacao.getEmpresa().setId(optEmpresa.get().getId());
                 cotacaoRepository.save(cotacao);
                 updatePreco(dto.getMaterialDto().getId());
-//                return dto;
+            }else {
+                empresaRepository.save(cotacao.getEmpresa());
+                cotacaoRepository.save(cotacao);
+                updatePreco(dto.getMaterialDto().getId());
             }
-            empresaRepository.save(cotacao.getEmpresa());
-            cotacaoRepository.save(cotacao);
-            updatePreco(dto.getMaterialDto().getId());
-//            return dto;
     }
 
     public List<CotacaoDto> findAll() {
@@ -66,14 +65,14 @@ public class CotacaoService {
 
     public void updatePreco(Long id) {
 
+        Material material = materialRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
+
         Map<String, CalcularPrecoStrategy> map = Map.of(
                 "max", new MaiorValor(),
                 "media", new MediaValor(),
                 "min", new MenorValor()
         );
-
-        Material material = materialRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
 
         material.setId(material.getId());
         material.setMediavalor(map.get("media").CalcularPreco(material.getCotacoes()));
