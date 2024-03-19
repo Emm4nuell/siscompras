@@ -37,4 +37,10 @@ public class EmpresaController {
     public ResponseEntity<List<EmpresaDto>> findAll(){
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.findAll());
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<EmpresaDto> update(@PathVariable Long id, @RequestBody EmpresaDto dto){
+        EmpresaDto empresadto = empresaService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(empresadto);
+    }
 }

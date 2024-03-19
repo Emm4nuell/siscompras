@@ -36,4 +36,11 @@ public class EmpresaService {
                 .orElseThrow(() -> new NullPointerException("Empresa não cadastrada!"));
         return EmpresaDto.toEmpresaDto(empresa);
     }
+
+    public EmpresaDto update(Long id, EmpresaDto dto) {
+        Empresa empresa = empresaRepository.findById(id).orElseThrow(() -> new NullPointerException("Empresa não disponível"));
+        dto.setId(empresa.getId());
+        empresaRepository.save(EmpresaDto.toEmpresa(dto));
+        return dto;
+    }
 }
