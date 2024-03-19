@@ -41,4 +41,10 @@ public class CotacaoController {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<CotacaoDto> update(@PathVariable Long id, @RequestBody CotacaoDto dto){
+        CotacaoDto cotacaoDto = cotacaoService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(cotacaoDto);
+    }
+
 }

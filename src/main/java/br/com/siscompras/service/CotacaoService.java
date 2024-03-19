@@ -81,4 +81,12 @@ public class CotacaoService {
         material.setMinvalor(map.get("min").CalcularPreco(material.getCotacoes()));
         materialRepository.save(material);
     }
+
+    public CotacaoDto update(Long id, CotacaoDto dto) {
+        Cotacao d = cotacaoRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Cotação não encontrada!"));
+        dto.setId(d.getId());
+        cotacaoRepository.save(CotacaoDto.toCotacao(dto));
+        return dto;
+    }
 }

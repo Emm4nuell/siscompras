@@ -18,10 +18,9 @@ public class EmpresaService {
 
     @Transactional
     public void save(EmpresaDto dto) {
-        Optional<Empresa> opt = empresaRepository.findByCnpj(dto.getCnpj());
-        if (opt.isPresent()) {
-            throw new NullPointerException("Empresa já está cadastrada no sistema");
-        }
+        Empresa opt = empresaRepository.findByCnpj(dto.getCnpj())
+                .orElseThrow(() -> new NullPointerException("Empresa já cadastrada no sistema!"));
+
         Empresa empresa = EmpresaDto.toEmpresa(dto);
         empresa.setStatus(true);
         empresaRepository.save(empresa);
@@ -33,7 +32,8 @@ public class EmpresaService {
     }
 
     public EmpresaDto findById(Long id) {
-        Empresa empresa = empresaRepository.findById(id).orElseThrow(() -> new NullPointerException("Empresa não cadastrada!"));
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Empresa não cadastrada!"));
         return EmpresaDto.toEmpresaDto(empresa);
     }
 }

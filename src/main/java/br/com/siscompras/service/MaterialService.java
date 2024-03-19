@@ -46,12 +46,6 @@ public class MaterialService {
         return MaterialDto.toMaterialDto(material);
     }
 
-    public void precoUpdate(List<BigDecimal> bigDecimals, Long id){
-
-        Optional<Material> opt = materialRepository.findById(id);
-
-    }
-
     public MaterialDto update(Long id, MaterialDto dto) {
         Material material = materialRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Material não encontrado!"));
