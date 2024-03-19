@@ -45,4 +45,13 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new NullPointerException("Usuário não localizado!"));
         return UsuarioDto.toUsuarioDto(usuario);
     }
+
+    public UsuarioDto update(Long id, UsuarioDto dto) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(()-> new NullPointerException("Usuario não localizado!"));
+
+        dto.setId(usuario.getId());
+        usuarioRepository.save(UsuarioDto.toUsuario(dto));
+        return dto;
+    }
 }

@@ -38,4 +38,10 @@ public class UsuarioController {
     public ResponseEntity<UsuarioDto> findById(@PathVariable Long id){
         return ResponseEntity.status(HttpStatus.OK).body(usuarioService.findById(id));
     }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<UsuarioDto> update(@PathVariable Long id, @RequestBody UsuarioDto dto){
+        UsuarioDto usuarioDto = usuarioService.update(id, dto);
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioDto);
+    }
 }
