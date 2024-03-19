@@ -35,7 +35,6 @@ public class CotacaoDto {
     private String quantidade;
     private String url;
     private String observacao;
-    @NotBlank(message = "Campo empresa é obrigatório!")
     private EmpresaDto empresaDto;
     private MaterialDto materialDto;
 
