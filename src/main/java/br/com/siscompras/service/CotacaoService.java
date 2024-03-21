@@ -88,4 +88,11 @@ public class CotacaoService {
         cotacaoRepository.save(CotacaoDto.toCotacao(dto));
         return dto;
     }
+
+    @Transactional
+    public void delete(Long id) {
+        Cotacao cotacao = cotacaoRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Cotação não encontrada!"));
+        cotacaoRepository.deleteById(id);
+    }
 }
