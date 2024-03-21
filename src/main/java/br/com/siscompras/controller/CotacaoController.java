@@ -47,4 +47,10 @@ public class CotacaoController {
         return ResponseEntity.status(HttpStatus.OK).body(cotacaoDto);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        cotacaoService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }
