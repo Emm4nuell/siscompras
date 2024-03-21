@@ -38,9 +38,16 @@ public class EmpresaService {
     }
 
     public EmpresaDto update(Long id, EmpresaDto dto) {
-        Empresa empresa = empresaRepository.findById(id).orElseThrow(() -> new NullPointerException("Empresa não disponível"));
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Empresa não disponível"));
         dto.setId(empresa.getId());
         empresaRepository.save(EmpresaDto.toEmpresa(dto));
         return dto;
+    }
+
+    public void delete(Long id) {
+        Empresa empresa = empresaRepository.findById(id)
+                .orElseThrow(() -> new NullPointerException("Empresa não disponível"));
+        empresaRepository.deleteById(id);
     }
 }
