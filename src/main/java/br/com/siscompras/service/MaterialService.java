@@ -6,6 +6,7 @@ import br.com.siscompras.repository.MaterialRepository;
 import br.com.siscompras.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -54,5 +55,9 @@ public class MaterialService {
         m.setId(material.getId());
         materialRepository.save(m);
         return dto;
+    }
+
+    public List<MaterialDto> findAllPage(Pageable pageable) {
+        return MaterialDto.toListMaterialDto(materialRepository.findAll(pageable).toList());
     }
 }

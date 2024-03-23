@@ -5,6 +5,7 @@ import br.com.siscompras.entity.Usuario;
 import br.com.siscompras.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -53,5 +54,9 @@ public class UsuarioService {
         dto.setId(usuario.getId());
         usuarioRepository.save(UsuarioDto.toUsuario(dto));
         return dto;
+    }
+
+    public List<UsuarioDto> findAllPage(Pageable pageable) {
+        return UsuarioDto.toListUsuarioDto(usuarioRepository.findAll(pageable).toList());
     }
 }
