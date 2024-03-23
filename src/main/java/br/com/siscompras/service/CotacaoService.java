@@ -85,7 +85,7 @@ public class CotacaoService {
 
     public CotacaoDto update(Long id, CotacaoDto dto) {
         Cotacao d = cotacaoRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Cotação não encontrada!"));
+                .orElseThrow(() -> new NullPointerException("Cotação não encontrada na base de dados!"));
         dto.setId(d.getId());
         cotacaoRepository.save(CotacaoDto.toCotacao(dto));
         return dto;
@@ -94,13 +94,11 @@ public class CotacaoService {
     @Transactional
     public void delete(Long id) {
         Cotacao cotacao = cotacaoRepository.findById(id)
-                .orElseThrow(() -> new NullPointerException("Cotação não encontrada!"));
+                .orElseThrow(() -> new NullPointerException("Cotação não encontrada na base de dados!"));
         cotacaoRepository.deleteById(id);
     }
 
     public List<CotacaoDto> findAllPage(Pageable pageable) {
-        List<CotacaoDto> dtos = cotacaoRepository.findAll(pageable).stream()
-                .map((e) -> CotacaoDto.toCotacaoDto(e)).collect(Collectors.toList());
-        return dtos;
+        return CotacaoDto.toListCotacaoDto(cotacaoRepository.findAll(pageable).toList());
     }
 }
