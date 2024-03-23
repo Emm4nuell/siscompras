@@ -13,6 +13,8 @@ import br.com.siscompras.service.strategy.MediaValor;
 import br.com.siscompras.service.strategy.MenorValor;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -94,5 +96,11 @@ public class CotacaoService {
         Cotacao cotacao = cotacaoRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Cotação não encontrada!"));
         cotacaoRepository.deleteById(id);
+    }
+
+    public List<CotacaoDto> findAllPage(Pageable pageable) {
+        List<CotacaoDto> dtos = cotacaoRepository.findAll(pageable).stream()
+                .map((e) -> CotacaoDto.toCotacaoDto(e)).collect(Collectors.toList());
+        return dtos;
     }
 }
