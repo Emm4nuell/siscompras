@@ -5,6 +5,10 @@ import br.com.siscompras.entity.Cotacao;
 import br.com.siscompras.service.CotacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,9 +34,19 @@ public class CotacaoController {
         return ResponseEntity.created(uri).build();
     }
 
+//    @GetMapping
+//    public ResponseEntity<List<CotacaoDto>> findAll() {
+//        return ResponseEntity.status(HttpStatus.OK).body(cotacaoService.findAll());
+//    }
+
     @GetMapping
-    public ResponseEntity<List<CotacaoDto>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(cotacaoService.findAll());
+    public ResponseEntity<List<CotacaoDto>> findAllPage(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy){
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return ResponseEntity.status(HttpStatus.OK).body(cotacaoService.findAllPage(pageable));
     }
 
     @GetMapping("/{id}")

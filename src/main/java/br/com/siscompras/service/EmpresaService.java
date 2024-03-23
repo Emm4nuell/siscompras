@@ -5,6 +5,7 @@ import br.com.siscompras.entity.Empresa;
 import br.com.siscompras.repository.EmpresaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -49,5 +50,9 @@ public class EmpresaService {
         Empresa empresa = empresaRepository.findById(id)
                 .orElseThrow(() -> new NullPointerException("Empresa não disponível"));
         empresaRepository.deleteById(id);
+    }
+
+    public List<EmpresaDto> findAllPage(Pageable pageable) {
+        return EmpresaDto.toListEmpresaDto(empresaRepository.findAll(pageable).toList());
     }
 }
