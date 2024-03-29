@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,6 +37,11 @@ public class UsuarioController {
 //        List<UsuarioDto> dto = usuarioService.findAll();
 //        return ResponseEntity.status(HttpStatus.OK).body(dto);
 //    }
+
+    @GetMapping("/private")
+    public String privado(Authentication authentication){
+        return authentication.getPrincipal().toString();
+    }
 
     @GetMapping
     public ResponseEntity<List<UsuarioDto>> findAllPage(

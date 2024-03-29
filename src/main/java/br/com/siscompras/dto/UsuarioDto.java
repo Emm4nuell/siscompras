@@ -1,7 +1,7 @@
 package br.com.siscompras.dto;
 
 import br.com.siscompras.entity.Usuario;
-import jakarta.persistence.Column;
+import br.com.siscompras.enums.PerfilEnum;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,9 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Data
@@ -33,7 +35,7 @@ public class UsuarioDto {
     private String contato;
     private Date datanascimento;
     private LocalDateTime datacadastro;
-    private String nivelacesso;
+    private Set<PerfilEnum> perfilEnums = new HashSet<>();
     private String senha;
     private String foto;
     private boolean status;
@@ -53,7 +55,7 @@ public class UsuarioDto {
         dto.contato = usuario.getContato();
         dto.datanascimento = usuario.getDatanascimento();
         dto.datacadastro = usuario.getDatacadastro();
-        dto.nivelacesso = usuario.getNivelacesso();
+        dto.perfilEnums = usuario.getPerfilEnums();
         dto.senha = usuario.getSenha();
         dto.foto = usuario.getFoto();
         dto.status = usuario.isStatus();
@@ -72,7 +74,7 @@ public class UsuarioDto {
                 usuario.setContato(dto.getContato());
                 usuario.setDatanascimento(dto.getDatanascimento());
                 usuario.setDatacadastro(dto.getDatacadastro());
-                usuario.setNivelacesso(dto.getNivelacesso());
+                usuario.setPerfilEnums(dto.getPerfilEnums());
                 usuario.setSenha(dto.getSenha());
                 usuario.setFoto(dto.getFoto());
                 usuario.setStatus(dto.isStatus());

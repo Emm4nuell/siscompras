@@ -2,6 +2,8 @@ package br.com.siscompras.exception;
 
 import br.com.siscompras.exception.ErrorException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -60,6 +62,17 @@ public class HandlerException {
                 LocalDateTime.now(),
                 null
         );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorException> dataIntegrityViolationException(DataIntegrityViolationException exception, HttpServletRequest http){
+        ErrorException error = new ErrorException(
+                "Internal Error Server",
+                "Dados duplicado no sistema!",
+                http.getRequestURI().toString(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                LocalDateTime.now(), null);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
     }
 }
