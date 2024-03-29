@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SiscomprasApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void main() {
+		SiscomprasApplication.main(new String[] {});
 	}
 
 }

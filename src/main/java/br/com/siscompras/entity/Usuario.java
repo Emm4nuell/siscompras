@@ -1,5 +1,6 @@
 package br.com.siscompras.entity;
 
+import br.com.siscompras.enums.PerfilEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,9 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -28,7 +31,10 @@ public class Usuario {
     private String contato;
     private Date datanascimento;
     private LocalDateTime datacadastro;
-    private String nivelacesso;
+    @ElementCollection(fetch = FetchType.LAZY) // É usado para mapear uma coleção
+    @CollectionTable(name = "PERFIS")
+    @Enumerated(EnumType.ORDINAL)
+    private Set<PerfilEnum> perfilEnums = new HashSet<>();
     private String senha;
     private String foto;
     private boolean status;
